@@ -4315,9 +4315,9 @@ export default function App() {
     const activeShip = ships.find(s => s.id === ship.id);
     const hasGH = activeShip?.assignedCrew?.some(c => c === 'golden_hunter' || c === 'gold_fisher');
     const buttonCount = hasGH ? 4 : 3;
-    const estimatedWidth = isMobile ? (buttonCount * 50 + 16) : (buttonCount * 58 + 20);
-    const estimatedHeight = isMobile ? 62 : 70;
-    const safeMargin = 10;
+    const estimatedWidth = isMobile ? (buttonCount * 44 + 14) : (buttonCount * 52 + 18);
+    const estimatedHeight = isMobile ? 54 : 64;
+    const safeMargin = 8;
 
     // Center horizontally over ship, safely clamped inside viewport
     let x = shipCenterX - estimatedWidth / 2;
@@ -4329,12 +4329,12 @@ export default function App() {
     }
 
     // Place vertically: preferentially above the ship, but if too close to top bar, place below
-    let y = rect.top - estimatedHeight - 10;
-    if (y < 60) {
-      y = rect.bottom + 10;
+    let y = rect.top - estimatedHeight - 8;
+    if (y < 50) {
+      y = rect.bottom + 8;
     }
-    if (y + estimatedHeight > screenH - 74) {
-      y = Math.max(60, screenH - 74 - estimatedHeight);
+    if (y + estimatedHeight > screenH - 60) {
+      y = Math.max(50, screenH - 60 - estimatedHeight);
     }
 
     setMenu({
@@ -6523,12 +6523,12 @@ export default function App() {
     <div style={{ margin: 0, background: '#080604', overflow: 'hidden', width: '100vw', height: '100dvh', position: 'relative' }}>
       <style>{`
         :root {
-            --ship-render-width: 170px;
-            --building-img-size: 130px;
-            --building-hotspot-width: 140px;
-            --bottom-nav-height: 68px;
-            --overlay-top: 60px;
-            --overlay-bottom: 74px;
+            --ship-render-width: 120px;
+            --building-img-size: 96px;
+            --building-hotspot-width: 106px;
+            --bottom-nav-height: 60px;
+            --overlay-top: 52px;
+            --overlay-bottom: 66px;
             --overlay-left: 2.5%;
             --overlay-width: 95%;
             --overlay-radius: 10px;
@@ -6548,10 +6548,10 @@ export default function App() {
 
         @media (max-width: 768px) {
             :root {
-                --ship-render-width: 145px;
-                --building-img-size: 120px;
-                --building-hotspot-width: 130px;
-                --bottom-nav-height: 68px;
+                --ship-render-width: 90px;
+                --building-img-size: 78px;
+                --building-hotspot-width: 88px;
+                --bottom-nav-height: 54px;
                 --overlay-top: 0px;
                 --overlay-bottom: 0px;
                 --overlay-left: 0px;
@@ -6571,8 +6571,8 @@ export default function App() {
                 --grid-columns: 1fr;
             }
             .bottom-nav {
-                height: 68px !important;
-                padding: 2px 2px 5px 2px !important;
+                height: 54px !important;
+                padding: 1px 2px 3px 2px !important;
             }
             .nav-item {
                 width: auto !important;
@@ -6581,79 +6581,79 @@ export default function App() {
             .nav-item-clan img,
             .nav-item-chat img,
             .nav-item-settings img {
-                height: 42px !important;
+                height: 33px !important;
             }
             .nav-item-rank img,
             .nav-item-friends img,
             .nav-item-storage img,
             .nav-item-shop img {
-                height: 36px !important;
+                height: 27px !important;
             }
             .top-bar {
-                top: 8px !important;
-                gap: 8px !important;
+                top: 6px !important;
+                gap: 6px !important;
             }
             .resource-box {
-                min-width: 85px !important;
-                padding: 4px 6px !important;
-                border-radius: 8px !important;
-                border: 2px solid #ca8a04 !important;
+                min-width: 68px !important;
+                padding: 3px 6px !important;
+                border-radius: 6px !important;
+                border: 1.5px solid #ca8a04 !important;
             }
             .res-icon {
-                width: 32px !important;
-                height: 32px !important;
+                width: 24px !important;
+                height: 24px !important;
             }
             .res-label {
-                font-size: 11.5px !important;
+                font-size: 10.5px !important;
                 font-weight: 800 !important;
-                padding-top: 2px !important;
-                margin-top: 2px !important;
+                padding-top: 1px !important;
+                margin-top: 1px !important;
                 text-shadow: 0 1px 2px #000 !important;
             }
             .tab-title {
-                font-size: 18px !important;
+                font-size: 17px !important;
                 font-weight: 800 !important;
-                padding-bottom: 6px !important;
-                margin-bottom: 10px !important;
+                padding-bottom: 5px !important;
+                margin-bottom: 8px !important;
                 text-shadow: 0 2px 4px rgba(0,0,0,0.8) !important;
             }
             .close-tab-btn {
-                padding: 4px 12px !important;
-                font-size: 13px !important;
+                padding: 3px 10px !important;
+                font-size: 12px !important;
                 font-weight: 800 !important;
-                border-radius: 6px !important;
+                border-radius: 5px !important;
             }
             .modal {
                 width: 90% !important;
-                max-width: 320px !important;
-                padding: 14px !important;
-                border-radius: 12px !important;
+                max-width: 310px !important;
+                padding: 12px !important;
+                border-radius: 10px !important;
             }
             .building-label {
-                padding: 3px 8px !important;
-                font-size: 11.5px !important;
+                padding: 2px 6px !important;
+                font-size: 10px !important;
                 font-weight: 800 !important;
                 border-width: 1.5px !important;
                 border-radius: 6px !important;
                 text-shadow: 0 1px 2px #000 !important;
             }
             .building-icon {
-                font-size: 28px !important;
+                font-size: 24px !important;
             }
             #ship-menu {
-                padding: 6px 8px !important;
-                gap: 6px !important;
+                padding: 4px 6px !important;
+                gap: 4px !important;
                 max-width: calc(100vw - 16px) !important;
             }
             .menu-btn {
-                min-width: 48px !important;
-                font-size: 12px !important;
+                min-width: 42px !important;
+                font-size: 10.5px !important;
                 font-weight: 800 !important;
             }
             .menu-icon {
-                width: 34px !important;
-                height: 34px !important;
-                font-size: 18px !important;
+                width: 28px !important;
+                height: 28px !important;
+                font-size: 15px !important;
             }
         }
 
@@ -6699,8 +6699,8 @@ export default function App() {
             border: 1.5px solid #ca8a04;
             color: #fef08a;
             border-radius: 6px;
-            padding: 3px 8px;
-            font-size: 11.5px;
+            padding: 2px 7px;
+            font-size: 10.5px;
             font-weight: 800;
             white-space: nowrap;
             box-shadow: 0 2px 8px rgba(0,0,0,0.85);
@@ -6711,16 +6711,16 @@ export default function App() {
             text-shadow: 0 1px 2px #000;
         }
         .building-icon {
-            font-size: 28px;
+            font-size: 24px;
             filter: drop-shadow(0 2px 4px rgba(0,0,0,0.7));
             margin-bottom: 1px;
         }
 
-        .top-bar { position: fixed; top: 8px; width: 95%; left: 2.5%; display: flex; justify-content: space-between; gap: 8px; z-index: 15; }
-        .resource-box { background: rgba(40, 30, 20, 0.94); border: 2px solid #ca8a04; padding: 5px 8px; border-radius: 8px; display: flex; flex-direction: column; align-items: center; min-width: 85px; color: #fff; cursor: pointer; transition: all 0.2s ease; box-shadow: 0 3px 10px rgba(0,0,0,0.7); flex: 1; }
+        .top-bar { position: fixed; top: 6px; width: 95%; left: 2.5%; display: flex; justify-content: space-between; gap: 6px; z-index: 15; }
+        .resource-box { background: rgba(40, 30, 20, 0.94); border: 1.5px solid #ca8a04; padding: 3px 6px; border-radius: 7px; display: flex; flex-direction: column; align-items: center; min-width: 72px; color: #fff; cursor: pointer; transition: all 0.2s ease; box-shadow: 0 3px 10px rgba(0,0,0,0.7); flex: 1; }
         .resource-box:hover { background: rgba(55, 40, 30, 0.98); transform: scale(1.03); }
-        .res-icon { width: 32px; height: 32px; }
-        .res-label { font-size: 11.5px; border-top: 1px solid #5d4037; padding-top: 2px; margin-top: 2px; width: 100%; text-align: center; font-weight: 800; color: #fef08a; text-shadow: 0 1px 2px rgba(0,0,0,0.9); }
+        .res-icon { width: 26px; height: 26px; }
+        .res-label { font-size: 10.5px; border-top: 1px solid #5d4037; padding-top: 1px; margin-top: 1px; width: 100%; text-align: center; font-weight: 800; color: #fef08a; text-shadow: 0 1px 2px rgba(0,0,0,0.9); }
 
         .ship { 
             position: absolute; 
@@ -7600,16 +7600,16 @@ export default function App() {
           left: 0;
           right: 0;
           width: 100%;
-          height: 68px !important;
+          height: 54px !important;
           background: url("https://raw.githubusercontent.com/alwjyhnyazsrhan-blip/Aamaaq/refs/heads/main/background.jpg.png") center bottom/100% 100% no-repeat !important;
           border-top: 1.5px solid rgba(234, 179, 8, 0.7) !important;
-          box-shadow: 0 -6px 18px rgba(0, 0, 0, 0.95), inset 0 1px 0 rgba(254, 240, 138, 0.25) !important;
+          box-shadow: 0 -4px 14px rgba(0, 0, 0, 0.95), inset 0 1px 0 rgba(254, 240, 138, 0.25) !important;
           display: flex !important;
           direction: ltr !important;
           align-items: center !important;
           justify-content: space-evenly !important;
           z-index: 100 !important;
-          padding: 2px 2px 5px 2px !important;
+          padding: 1px 2px 3px 2px !important;
           gap: 1px !important;
           overflow: visible !important;
           user-select: none !important;
@@ -7637,8 +7637,8 @@ export default function App() {
           top: 50%;
           left: 50%;
           transform: translate(-50%, -50%);
-          width: 48px;
-          height: 48px;
+          width: 38px;
+          height: 38px;
           border-radius: 50%;
           background: radial-gradient(circle, rgba(234, 179, 8, 0.22) 0%, rgba(202, 138, 4, 0.07) 50%, transparent 72%);
           pointer-events: none;
@@ -7647,14 +7647,14 @@ export default function App() {
         }
 
         .nav-item:hover::before {
-          width: 54px;
-          height: 54px;
+          width: 44px;
+          height: 44px;
           background: radial-gradient(circle, rgba(250, 204, 21, 0.42) 0%, rgba(202, 138, 4, 0.15) 55%, transparent 75%);
         }
 
         .nav-item.active::before {
-          width: 58px;
-          height: 58px;
+          width: 46px;
+          height: 46px;
           background: radial-gradient(circle, rgba(56, 189, 248, 0.48) 0%, rgba(14, 165, 233, 0.18) 55%, transparent 75%);
         }
 
@@ -7672,31 +7672,31 @@ export default function App() {
 
         /* Calibrated heights so icons are elegant, clear and not oversized */
         .nav-item-clan img {
-          height: 42px !important;
+          height: 33px !important;
           width: auto !important;
         }
         .nav-item-rank img {
-          height: 36px !important;
+          height: 27px !important;
           width: auto !important;
         }
         .nav-item-friends img {
-          height: 36px !important;
+          height: 27px !important;
           width: auto !important;
         }
         .nav-item-storage img {
-          height: 36px !important;
+          height: 27px !important;
           width: auto !important;
         }
         .nav-item-shop img {
-          height: 36px !important;
+          height: 27px !important;
           width: auto !important;
         }
         .nav-item-chat img {
-          height: 42px !important;
+          height: 33px !important;
           width: auto !important;
         }
         .nav-item-settings img {
-          height: 42px !important;
+          height: 33px !important;
           width: auto !important;
         }
 
@@ -7724,16 +7724,16 @@ export default function App() {
 
         .medallion-box {
           position: relative;
-          width: 38px;
-          height: 38px;
+          width: 32px;
+          height: 32px;
           display: flex;
           align-items: center;
           justify-content: center;
         }
 
         .medallion-ring {
-          width: 36px;
-          height: 36px;
+          width: 30px;
+          height: 30px;
           border-radius: 50%;
           border: 1.5px solid #ca8a04;
           background: radial-gradient(circle at 35% 30%, #1e293b 0%, #0f172a 60%, #020617 100%);
@@ -7776,13 +7776,13 @@ export default function App() {
         .plaque-btn {
           margin-top: 1px;
           width: 100%;
-          max-width: 50px;
-          padding: 1.5px 0.5px;
+          max-width: 44px;
+          padding: 1px 0px;
           background: linear-gradient(180deg, #1f1912 0%, #0a0805 100%);
           border: 1px solid #ca8a04;
-          border-radius: 4px;
+          border-radius: 3px;
           color: #fef08a;
-          font-size: 10px;
+          font-size: 9px;
           font-weight: 800;
           text-align: center;
           text-shadow: 0 1px 2px #000;
@@ -8438,19 +8438,19 @@ export default function App() {
                         {/* Level floating badge overlaid on ship */}
                         <span style={{
                           position: 'absolute',
-                          bottom: '-4px',
-                          right: '8px',
+                          bottom: '-3px',
+                          right: '6px',
                           background: 'rgba(133, 77, 14, 0.95)',
                           color: '#fff',
-                          border: '1.5px solid #fef08a',
-                          borderRadius: '6px',
-                          fontSize: '12.5px',
-                          padding: '2px 7px',
+                          border: '1.2px solid #fef08a',
+                          borderRadius: '5px',
+                          fontSize: '10.5px',
+                          padding: '1px 5px',
                           fontWeight: 'bold',
                           zIndex: 5,
                           whiteSpace: 'nowrap',
                           direction: 'rtl',
-                          boxShadow: '0 2px 6px rgba(0,0,0,0.8)'
+                          boxShadow: '0 2px 5px rgba(0,0,0,0.8)'
                         }}>
                           {ship.imgEmoji || '⛵'} م.{ship.level ?? 1}
                         </span>
