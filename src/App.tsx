@@ -4315,9 +4315,9 @@ export default function App() {
     const activeShip = ships.find(s => s.id === ship.id);
     const hasGH = activeShip?.assignedCrew?.some(c => c === 'golden_hunter' || c === 'gold_fisher');
     const buttonCount = hasGH ? 4 : 3;
-    const estimatedWidth = isMobile ? (buttonCount * 54 + 18) : (buttonCount * 64 + 24);
-    const estimatedHeight = isMobile ? 66 : 76;
-    const safeMargin = 10;
+    const estimatedWidth = isMobile ? (buttonCount * 44 + 14) : (buttonCount * 52 + 18);
+    const estimatedHeight = isMobile ? 54 : 64;
+    const safeMargin = 8;
 
     // Center horizontally over ship, safely clamped inside viewport
     let x = shipCenterX - estimatedWidth / 2;
@@ -4329,12 +4329,12 @@ export default function App() {
     }
 
     // Place vertically: preferentially above the ship, but if too close to top bar, place below
-    let y = rect.top - estimatedHeight - 10;
-    if (y < 60) {
-      y = rect.bottom + 10;
+    let y = rect.top - estimatedHeight - 8;
+    if (y < 46) {
+      y = rect.bottom + 8;
     }
-    if (y + estimatedHeight > screenH - 78) {
-      y = Math.max(60, screenH - 78 - estimatedHeight);
+    if (y + estimatedHeight > screenH - 58) {
+      y = Math.max(46, screenH - 58 - estimatedHeight);
     }
 
     setMenu({
@@ -6523,31 +6523,35 @@ export default function App() {
     <div style={{ margin: 0, background: '#080604', overflow: 'hidden', width: '100vw', height: '100dvh', position: 'relative' }}>
       <style>{`
         :root {
-            --ship-render-width: 185px;
-            --bottom-nav-height: 70px;
-            --overlay-top: 55px;
-            --overlay-bottom: 74px;
+            --ship-render-width: 105px;
+            --building-img-size: 95px;
+            --building-hotspot-width: 105px;
+            --bottom-nav-height: 56px;
+            --overlay-top: 48px;
+            --overlay-bottom: 60px;
             --overlay-left: 2.5%;
             --overlay-width: 95%;
-            --overlay-radius: 12px;
+            --overlay-radius: 10px;
             --overlay-border: 2px solid #ca8a04;
-            --shop-border-width: 4px;
+            --shop-border-width: 3px;
             --shop-flex-direction: row;
-            --shop-sidebar-width: 160px;
+            --shop-sidebar-width: 150px;
             --shop-sidebar-direction: column;
             --shop-sidebar-border-right: 2px solid #5c3a21;
             --shop-sidebar-border-bottom: none;
             --shop-sidebar-overflow-x: visible;
-            --shop-sidebar-padding: 8px;
-            --shop-item-min-width: 175px;
-            --shop-max-height: 88vh;
+            --shop-sidebar-padding: 6px;
+            --shop-item-min-width: 165px;
+            --shop-max-height: 86vh;
             --grid-columns: 1fr 1fr;
         }
 
         @media (max-width: 768px) {
             :root {
-                --ship-render-width: 120px;
-                --bottom-nav-height: 62px;
+                --ship-render-width: 78px;
+                --building-img-size: 72px;
+                --building-hotspot-width: 82px;
+                --bottom-nav-height: 50px;
                 --overlay-top: 0px;
                 --overlay-bottom: 0px;
                 --overlay-left: 0px;
@@ -6561,14 +6565,14 @@ export default function App() {
                 --shop-sidebar-border-right: none;
                 --shop-sidebar-border-bottom: 2px solid #5c3a21;
                 --shop-sidebar-overflow-x: auto;
-                --shop-sidebar-padding: 6px;
-                --shop-item-min-width: 135px;
+                --shop-sidebar-padding: 4px;
+                --shop-item-min-width: 125px;
                 --shop-max-height: 100vh;
                 --grid-columns: 1fr;
             }
             .bottom-nav {
-                height: 62px !important;
-                padding: 2px 2px 4px 2px !important;
+                height: 50px !important;
+                padding: 1px 2px 3px 2px !important;
             }
             .nav-item {
                 width: auto !important;
@@ -6577,78 +6581,78 @@ export default function App() {
             .nav-item-clan img,
             .nav-item-chat img,
             .nav-item-settings img {
-                height: 44px !important;
+                height: 32px !important;
             }
             .nav-item-rank img,
             .nav-item-friends img,
             .nav-item-storage img,
             .nav-item-shop img {
-                height: 38px !important;
-            }
-            .top-bar {
-                top: 6px !important;
-                gap: 6px !important;
-            }
-            .resource-box {
-                min-width: 75px !important;
-                padding: 4px 8px !important;
-                border-radius: 8px !important;
-            }
-            .res-icon {
-                width: 28px !important;
                 height: 28px !important;
             }
+            .top-bar {
+                top: 4px !important;
+                gap: 4px !important;
+            }
+            .resource-box {
+                min-width: 58px !important;
+                padding: 2px 6px !important;
+                border-radius: 6px !important;
+            }
+            .res-icon {
+                width: 20px !important;
+                height: 20px !important;
+            }
             .res-label {
-                font-size: 13px !important;
+                font-size: 11px !important;
                 font-weight: 800 !important;
-                padding-top: 2px !important;
-                margin-top: 2px !important;
+                padding-top: 1px !important;
+                margin-top: 1px !important;
                 text-shadow: 0 1px 2px #000 !important;
             }
             .tab-title {
-                font-size: 18px !important;
+                font-size: 16px !important;
                 font-weight: 800 !important;
-                padding-bottom: 6px !important;
-                margin-bottom: 10px !important;
+                padding-bottom: 4px !important;
+                margin-bottom: 8px !important;
                 text-shadow: 0 2px 4px rgba(0,0,0,0.8) !important;
             }
             .close-tab-btn {
-                padding: 4px 12px !important;
-                font-size: 13px !important;
+                padding: 3px 10px !important;
+                font-size: 12px !important;
                 font-weight: 800 !important;
-                border-radius: 6px !important;
+                border-radius: 5px !important;
             }
             .modal {
                 width: 90% !important;
-                max-width: 320px !important;
-                padding: 14px !important;
-                border-radius: 12px !important;
+                max-width: 300px !important;
+                padding: 12px !important;
+                border-radius: 10px !important;
             }
             .building-label {
-                padding: 4px 10px !important;
-                font-size: 13px !important;
+                padding: 2px 6px !important;
+                font-size: 10px !important;
                 font-weight: 800 !important;
-                border-width: 2px !important;
-                border-radius: 8px !important;
+                border-width: 1.5px !important;
+                border-radius: 6px !important;
                 text-shadow: 0 1px 2px #000 !important;
             }
             .building-icon {
-                font-size: 30px !important;
+                font-size: 22px !important;
             }
             #ship-menu {
-                padding: 6px 8px !important;
-                gap: 6px !important;
+                padding: 4px 6px !important;
+                gap: 4px !important;
                 max-width: calc(100vw - 16px) !important;
             }
             .menu-btn {
-                min-width: 48px !important;
-                font-size: 12px !important;
+                min-width: 42px !important;
+                font-size: 10.5px !important;
                 font-weight: 800 !important;
             }
             .menu-icon {
-                width: 34px !important;
-                height: 34px !important;
-                font-size: 18px !important;
+                width: 28px !important;
+                height: 28px !important;
+                font-size: 15px !important;
             }
         }
 
@@ -6686,36 +6690,36 @@ export default function App() {
             align-items: center;
         }
         .building-hotspot:hover {
-            transform: scale(1.08);
-            filter: drop-shadow(0 0 8px rgba(254, 240, 138, 0.8));
+            transform: scale(1.06);
+            filter: drop-shadow(0 0 6px rgba(254, 240, 138, 0.8));
         }
         .building-label {
             background: rgba(30, 15, 5, 0.98);
-            border: 2.5px solid #ca8a04;
+            border: 1.5px solid #ca8a04;
             color: #fef08a;
-            border-radius: 12px;
-            padding: 6px 14px;
-            font-size: 14px;
-            font-weight: 900;
+            border-radius: 6px;
+            padding: 2px 8px;
+            font-size: 11px;
+            font-weight: 800;
             white-space: nowrap;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.85);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.85);
             display: flex;
             align-items: center;
-            gap: 6px;
+            gap: 4px;
             direction: rtl;
-            text-shadow: 0 1px 3px #000;
+            text-shadow: 0 1px 2px #000;
         }
         .building-icon {
-            font-size: 36px;
-            filter: drop-shadow(0 3px 6px rgba(0,0,0,0.7));
-            margin-bottom: 2px;
+            font-size: 26px;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.7));
+            margin-bottom: 1px;
         }
 
-        .top-bar { position: fixed; top: 10px; width: 95%; left: 2.5%; display: flex; justify-content: space-between; z-index: 15; }
-        .resource-box { background: rgba(40, 30, 20, 0.94); border: 2px solid #ca8a04; padding: 6px 14px; border-radius: 10px; display: flex; flex-direction: column; align-items: center; min-width: 95px; color: #fff; cursor: pointer; transition: all 0.2s ease; box-shadow: 0 4px 14px rgba(0,0,0,0.7); }
+        .top-bar { position: fixed; top: 6px; width: 95%; left: 2.5%; display: flex; justify-content: space-between; z-index: 15; }
+        .resource-box { background: rgba(40, 30, 20, 0.94); border: 1.5px solid #ca8a04; padding: 3px 8px; border-radius: 8px; display: flex; flex-direction: column; align-items: center; min-width: 65px; color: #fff; cursor: pointer; transition: all 0.2s ease; box-shadow: 0 3px 10px rgba(0,0,0,0.7); }
         .resource-box:hover { background: rgba(55, 40, 30, 0.98); transform: scale(1.03); }
-        .res-icon { width: 36px; height: 36px; }
-        .res-label { font-size: 14px; border-top: 1px solid #5d4037; padding-top: 3px; margin-top: 3px; width: 100%; text-align: center; font-weight: 800; color: #fef08a; text-shadow: 0 1px 3px rgba(0,0,0,0.9); }
+        .res-icon { width: 24px; height: 24px; }
+        .res-label { font-size: 11.5px; border-top: 1px solid #5d4037; padding-top: 1px; margin-top: 1px; width: 100%; text-align: center; font-weight: 800; color: #fef08a; text-shadow: 0 1px 2px rgba(0,0,0,0.9); }
 
         .ship { 
             position: absolute; 
@@ -7595,17 +7599,17 @@ export default function App() {
           left: 0;
           right: 0;
           width: 100%;
-          height: 70px !important;
+          height: 54px !important;
           background: url("https://raw.githubusercontent.com/alwjyhnyazsrhan-blip/Aamaaq/refs/heads/main/background.jpg.png") center bottom/100% 100% no-repeat !important;
-          border-top: 2px solid rgba(234, 179, 8, 0.7) !important;
-          box-shadow: 0 -6px 20px rgba(0, 0, 0, 0.95), inset 0 1px 0 rgba(254, 240, 138, 0.25) !important;
+          border-top: 1.5px solid rgba(234, 179, 8, 0.7) !important;
+          box-shadow: 0 -4px 14px rgba(0, 0, 0, 0.95), inset 0 1px 0 rgba(254, 240, 138, 0.25) !important;
           display: flex !important;
           direction: ltr !important;
           align-items: center !important;
           justify-content: space-evenly !important;
           z-index: 100 !important;
-          padding: 2px 4px 6px 4px !important;
-          gap: 2px !important;
+          padding: 1px 3px 3px 3px !important;
+          gap: 1px !important;
           overflow: visible !important;
           user-select: none !important;
           box-sizing: border-box !important;
@@ -7632,8 +7636,8 @@ export default function App() {
           top: 50%;
           left: 50%;
           transform: translate(-50%, -50%);
-          width: 52px;
-          height: 52px;
+          width: 38px;
+          height: 38px;
           border-radius: 50%;
           background: radial-gradient(circle, rgba(234, 179, 8, 0.22) 0%, rgba(202, 138, 4, 0.07) 50%, transparent 72%);
           pointer-events: none;
@@ -7642,14 +7646,14 @@ export default function App() {
         }
 
         .nav-item:hover::before {
-          width: 58px;
-          height: 58px;
+          width: 44px;
+          height: 44px;
           background: radial-gradient(circle, rgba(250, 204, 21, 0.42) 0%, rgba(202, 138, 4, 0.15) 55%, transparent 75%);
         }
 
         .nav-item.active::before {
-          width: 62px;
-          height: 62px;
+          width: 46px;
+          height: 46px;
           background: radial-gradient(circle, rgba(56, 189, 248, 0.48) 0%, rgba(14, 165, 233, 0.18) 55%, transparent 75%);
         }
 
@@ -7660,79 +7664,79 @@ export default function App() {
           object-fit: contain !important;
           image-rendering: -webkit-optimize-contrast !important;
           image-rendering: high-quality !important;
-          filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.95)) drop-shadow(0 0 6px rgba(250, 204, 21, 0.45)) brightness(1.2) contrast(1.15) !important;
+          filter: drop-shadow(0 3px 6px rgba(0, 0, 0, 0.95)) drop-shadow(0 0 5px rgba(250, 204, 21, 0.4)) brightness(1.2) contrast(1.15) !important;
           transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), filter 0.2s ease !important;
           pointer-events: none !important;
         }
 
         /* Calibrated heights so icons are elegant, clear and not oversized */
         .nav-item-clan img {
-          height: 52px !important;
+          height: 36px !important;
           width: auto !important;
         }
         .nav-item-rank img {
-          height: 44px !important;
+          height: 30px !important;
           width: auto !important;
         }
         .nav-item-friends img {
-          height: 44px !important;
+          height: 30px !important;
           width: auto !important;
         }
         .nav-item-storage img {
-          height: 44px !important;
+          height: 30px !important;
           width: auto !important;
         }
         .nav-item-shop img {
-          height: 44px !important;
+          height: 30px !important;
           width: auto !important;
         }
         .nav-item-chat img {
-          height: 54px !important;
+          height: 38px !important;
           width: auto !important;
         }
         .nav-item-settings img {
-          height: 54px !important;
+          height: 38px !important;
           width: auto !important;
         }
 
         .nav-item:hover img {
-          transform: translateY(-4px) !important;
-          filter: drop-shadow(0 6px 12px rgba(0, 0, 0, 0.95)) drop-shadow(0 0 12px rgba(250, 204, 21, 0.9)) brightness(1.38) contrast(1.2) saturate(1.25) !important;
+          transform: translateY(-2px) !important;
+          filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.95)) drop-shadow(0 0 8px rgba(250, 204, 21, 0.9)) brightness(1.35) contrast(1.2) saturate(1.2) !important;
         }
 
         .nav-item.active img {
-          transform: translateY(-5px) !important;
-          filter: drop-shadow(0 6px 14px rgba(0, 0, 0, 0.95)) drop-shadow(0 0 16px rgba(56, 189, 248, 0.95)) drop-shadow(0 0 4px #ffffff) brightness(1.42) contrast(1.22) saturate(1.22) !important;
+          transform: translateY(-3px) !important;
+          filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.95)) drop-shadow(0 0 12px rgba(56, 189, 248, 0.95)) drop-shadow(0 0 3px #ffffff) brightness(1.4) contrast(1.2) saturate(1.2) !important;
         }
 
         @keyframes pulseMedallion {
-          0% { box-shadow: 0 0 10px #0284c7, inset 0 0 8px rgba(56, 189, 248, 0.5); }
-          100% { box-shadow: 0 0 20px #38bdf8, inset 0 0 16px rgba(56, 189, 248, 0.9); }
+          0% { box-shadow: 0 0 8px #0284c7, inset 0 0 6px rgba(56, 189, 248, 0.5); }
+          100% { box-shadow: 0 0 14px #38bdf8, inset 0 0 10px rgba(56, 189, 248, 0.9); }
         }
 
         .nav-item.active .plaque-btn {
           border-color: #38bdf8 !important;
           color: #38bdf8 !important;
           background: linear-gradient(180deg, #0284c7 0%, #075985 100%) !important;
-          box-shadow: 0 0 10px rgba(56, 189, 248, 0.7) !important;
+          box-shadow: 0 0 8px rgba(56, 189, 248, 0.7) !important;
         }
 
         .medallion-box {
           position: relative;
-          width: 44px;
-          height: 44px;
+          width: 34px;
+          height: 34px;
           display: flex;
           align-items: center;
           justify-content: center;
         }
 
         .medallion-ring {
-          width: 42px;
-          height: 42px;
+          width: 32px;
+          height: 32px;
           border-radius: 50%;
-          border: 2px solid #ca8a04;
+          border: 1.5px solid #ca8a04;
           background: radial-gradient(circle at 35% 30%, #1e293b 0%, #0f172a 60%, #020617 100%);
-          box-shadow: 0 4px 10px rgba(0,0,0,0.8), inset 0 0 8px rgba(250, 204, 21, 0.25);
+          box-shadow: 0 3px 8px rgba(0,0,0,0.8), inset 0 0 6px rgba(250, 204, 21, 0.25);
           display: flex;
           align-items: center;
           justify-content: center;
@@ -7742,46 +7746,46 @@ export default function App() {
 
         .jewel-top-diamond {
           position: absolute;
-          top: -5px;
+          top: -4px;
           left: 50%;
           transform: translateX(-50%);
-          width: 6px;
-          height: 6px;
+          width: 5px;
+          height: 5px;
           background: #38bdf8;
           clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
-          box-shadow: 0 0 6px #38bdf8;
+          box-shadow: 0 0 5px #38bdf8;
           border: 1px solid #e0f2fe;
           z-index: 2;
         }
 
         .jewel-bottom-diamond {
           position: absolute;
-          bottom: -5px;
+          bottom: -4px;
           left: 50%;
           transform: translateX(-50%);
-          width: 6px;
-          height: 6px;
+          width: 5px;
+          height: 5px;
           background: #38bdf8;
           clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
-          box-shadow: 0 0 6px #38bdf8;
+          box-shadow: 0 0 5px #38bdf8;
           border: 1px solid #e0f2fe;
           z-index: 2;
         }
 
         .plaque-btn {
-          margin-top: 2px;
+          margin-top: 1px;
           width: 100%;
-          max-width: 62px;
-          padding: 2px 1px;
+          max-width: 48px;
+          padding: 1px 1px;
           background: linear-gradient(180deg, #1f1912 0%, #0a0805 100%);
-          border: 1.5px solid #ca8a04;
-          border-radius: 4px;
+          border: 1px solid #ca8a04;
+          border-radius: 3px;
           color: #fef08a;
-          font-size: 11.5px;
-          font-weight: 900;
+          font-size: 9.5px;
+          font-weight: 800;
           text-align: center;
           text-shadow: 0 1px 2px #000;
-          box-shadow: 0 2px 4px rgba(0,0,0,0.8);
+          box-shadow: 0 1px 3px rgba(0,0,0,0.8);
           white-space: nowrap;
           transition: all 0.2s ease;
         }
@@ -8036,7 +8040,7 @@ export default function App() {
                   position: 'absolute',
                   left: '8%', 
                   top: '36%', 
-                  width: '180px',
+                  width: 'var(--building-hotspot-width)',
                   display: 'flex',
                   flexDirection: 'column',
                   alignItems: 'center',
@@ -8055,36 +8059,36 @@ export default function App() {
                 title={portDestroyed ? "بيت السمك (محترق ومدمر)" : `بيت السمك - المستوى ${fishStorageLevel}`}
               >
                 <div className="building-label" style={{ 
-                  marginBottom: '8px', 
+                  marginBottom: '4px', 
                   background: portDestroyed ? 'rgba(50, 10, 10, 0.95)' : 'rgba(0,0,0,0.85)', 
-                  padding: '4px 14px', 
-                  borderRadius: '12px', 
-                  border: portDestroyed ? '1.5px solid #ef4444' : '1px solid #ca8a04', 
+                  padding: '2px 8px', 
+                  borderRadius: '6px', 
+                  border: portDestroyed ? '1px solid #ef4444' : '1px solid #ca8a04', 
                   whiteSpace: 'nowrap', 
-                  boxShadow: portDestroyed ? '0 4px 14px rgba(239, 68, 68, 0.7)' : '0 4px 14px rgba(0,0,0,0.6)',
+                  boxShadow: portDestroyed ? '0 2px 8px rgba(239, 68, 68, 0.7)' : '0 2px 8px rgba(0,0,0,0.6)',
                   display: 'flex',
                   alignItems: 'center',
-                  gap: '6px'
+                  gap: '4px'
                 }}>
-                  <span style={{ fontSize: '15px', fontWeight: '900', color: portDestroyed ? '#fca5a5' : '#facc15', fontFamily: 'Cairo, sans-serif' }}>
-                    {portDestroyed ? `🔥 بيت السمك (محترق ومدمر)` : `🐟 بيت السمك (مستوى ${fishStorageLevel})`}
+                  <span style={{ fontSize: '11px', fontWeight: '800', color: portDestroyed ? '#fca5a5' : '#facc15', fontFamily: 'Cairo, sans-serif' }}>
+                    {portDestroyed ? `🔥 بيت السمك` : `🐟 بيت السمك (م ${fishStorageLevel})`}
                   </span>
                 </div>
 
                 <div style={{
-                  width: '170px',
-                  height: '170px',
+                  width: 'var(--building-img-size)',
+                  height: 'var(--building-img-size)',
                   position: 'relative',
                   filter: portDestroyed
                     ? 'grayscale(0.9) brightness(0.22) contrast(1.5) sepia(0.8) hue-rotate(-20deg) drop-shadow(0 0 16px rgba(239, 68, 68, 0.9))'
-                    : 'drop-shadow(0 14px 22px rgba(0,0,0,0.65))',
+                    : 'drop-shadow(0 8px 14px rgba(0,0,0,0.65))',
                   transition: 'transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1)',
                   backfaceVisibility: 'hidden',
                   WebkitBackfaceVisibility: 'hidden',
                   display: 'flex',
                   alignItems: 'flex-end',
                   justifyContent: 'center'
-                }} className="hover:scale-110 active:scale-95">
+                }} className="hover:scale-108 active:scale-95">
                   <img 
                     key={`beach-fish-house-img-${fishStorageLevel}`}
                     src={getFishHouseImageUrl(fishStorageLevel)} 
@@ -8096,7 +8100,7 @@ export default function App() {
                       objectFit: 'contain',
                       pointerEvents: 'none',
                       transition: 'opacity 0.4s ease-in-out, transform 0.3s ease',
-                      filter: 'drop-shadow(0 8px 16px rgba(0,0,0,0.7))',
+                      filter: 'drop-shadow(0 6px 12px rgba(0,0,0,0.7))',
                       transform: 'scaleX(-1)'
                     }}
                     loading="eager"
@@ -8108,9 +8112,9 @@ export default function App() {
                   {/* Fire and smoke rising from burned fish house */}
                   {portDestroyed && (
                     <div style={{ position: 'absolute', inset: 0, zIndex: 12, pointerEvents: 'none' }}>
-                      <span style={{ position: 'absolute', top: '-15px', left: '20%', fontSize: '28px', animation: 'bounce 0.7s infinite alternate' }}>🔥</span>
-                      <span style={{ position: 'absolute', top: '10px', left: '60%', fontSize: '24px', animation: 'pulse 0.6s infinite alternate' }}>🔥</span>
-                      <span style={{ position: 'absolute', top: '-30px', left: '40%', fontSize: '28px', opacity: 0.85, animation: 'pulse 1.8s infinite' }}>💨</span>
+                      <span style={{ position: 'absolute', top: '-10px', left: '20%', fontSize: '18px', animation: 'bounce 0.7s infinite alternate' }}>🔥</span>
+                      <span style={{ position: 'absolute', top: '5px', left: '60%', fontSize: '16px', animation: 'pulse 0.6s infinite alternate' }}>🔥</span>
+                      <span style={{ position: 'absolute', top: '-20px', left: '40%', fontSize: '18px', opacity: 0.85, animation: 'pulse 1.8s infinite' }}>💨</span>
                     </div>
                   )}
                 </div>
@@ -8122,7 +8126,7 @@ export default function App() {
                   position: 'absolute',
                   left: '73%', 
                   top: '26%', 
-                  width: '180px',
+                  width: 'var(--building-hotspot-width)',
                   display: 'flex',
                   flexDirection: 'column',
                   alignItems: 'center',
@@ -8141,26 +8145,26 @@ export default function App() {
                 title={portDestroyed ? "بيت السفن (محترق ومدمر)" : "بيت السفن"}
               >
                 <div className="building-label" style={{ 
-                  marginBottom: '8px', 
+                  marginBottom: '4px', 
                   background: portDestroyed ? 'rgba(50, 10, 10, 0.95)' : 'rgba(0,0,0,0.85)', 
-                  padding: '6px 14px', 
-                  borderRadius: '12px', 
-                  border: portDestroyed ? '1.5px solid #ef4444' : '1.5px solid #ca8a04', 
+                  padding: '2px 8px', 
+                  borderRadius: '6px', 
+                  border: portDestroyed ? '1px solid #ef4444' : '1px solid #ca8a04', 
                   whiteSpace: 'nowrap', 
-                  boxShadow: portDestroyed ? '0 4px 14px rgba(239, 68, 68, 0.7)' : '0 4px 12px rgba(0,0,0,0.6)' 
+                  boxShadow: portDestroyed ? '0 2px 8px rgba(239, 68, 68, 0.7)' : '0 2px 8px rgba(0,0,0,0.6)' 
                 }}>
-                  <span style={{ fontSize: '15px', fontWeight: '900', color: portDestroyed ? '#fca5a5' : '#facc15', fontFamily: 'Cairo, sans-serif' }}>
-                    {portDestroyed ? `🔥 بيت السفن (محترق ومدمر)` : `⚓ بيت السفن (مستوى ${shipTowerLevel})`}
+                  <span style={{ fontSize: '11px', fontWeight: '800', color: portDestroyed ? '#fca5a5' : '#facc15', fontFamily: 'Cairo, sans-serif' }}>
+                    {portDestroyed ? `🔥 بيت السفن` : `⚓ بيت السفن (م ${shipTowerLevel})`}
                   </span>
                 </div>
                 
                 <div style={{
-                  width: '160px',
-                  height: '160px',
+                  width: 'var(--building-img-size)',
+                  height: 'var(--building-img-size)',
                   position: 'relative',
                   filter: portDestroyed
                     ? 'grayscale(0.9) brightness(0.22) contrast(1.5) sepia(0.8) hue-rotate(-20deg) drop-shadow(0 0 16px rgba(239, 68, 68, 0.9))'
-                    : 'drop-shadow(0 12px 20px rgba(0,0,0,0.5))',
+                    : 'drop-shadow(0 8px 14px rgba(0,0,0,0.5))',
                   transition: 'transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1)',
                   backfaceVisibility: 'hidden',
                   WebkitBackfaceVisibility: 'hidden',
@@ -8168,7 +8172,7 @@ export default function App() {
                   alignItems: 'flex-end',
                   justifyContent: 'center',
                   transform: 'none'
-                }} className="hover:scale-110 active:scale-95">
+                }} className="hover:scale-108 active:scale-95">
                   <img 
                     src={getHarborImageUrl(shipTowerLevel)} 
                     alt="بيت السفن"
@@ -8267,7 +8271,7 @@ export default function App() {
                                 toggleAutoFishing(ship.id);
                               }}
                               title={ship.autoFishingPaused ? "الصيد التلقائي متوقف حالياً - اضغط للتشغيل" : "الصيد التلقائي يعمل - اضغط للإيقاف مؤقتاً"}
-                              className={`cursor-pointer absolute -top-7 left-1/2 flex items-center gap-2 px-3 py-1 rounded-full text-xs font-black border shadow-lg whitespace-nowrap z-30 transition-all hover:scale-105 active:scale-95 ${
+                              className={`cursor-pointer absolute -top-5 left-1/2 flex items-center gap-1.5 px-2 py-0.5 rounded-full text-[10px] font-black border shadow-md whitespace-nowrap z-30 transition-all hover:scale-105 active:scale-95 ${
                                 ship.autoFishingPaused 
                                   ? 'bg-slate-900/95 text-slate-300 border-slate-500 shadow-slate-950/60' 
                                   : 'bg-amber-950/95 text-amber-200 border-amber-400/90 shadow-amber-500/40 animate-pulse'
@@ -8276,9 +8280,9 @@ export default function App() {
                                 transform: `translateX(-50%) scaleX(${ship.scaleX < 0 ? -1 : 1})`,
                               }}
                             >
-                              <span style={{ fontSize: '14px' }}>🔱</span>
-                              <span>{ship.autoFishingPaused ? 'صيد تلقائي [متوقف]' : 'صيد تلقائي [شغال]'}</span>
-                              <span className={`text-[11px] px-2 py-0.5 rounded font-black ${ship.autoFishingPaused ? 'bg-emerald-600 text-white' : 'bg-red-600 text-white'}`}>
+                              <span style={{ fontSize: '11px' }}>🔱</span>
+                              <span>{ship.autoFishingPaused ? 'صيد [متوقف]' : 'صيد [شغال]'}</span>
+                              <span className={`text-[9.5px] px-1.5 py-0.5 rounded font-black ${ship.autoFishingPaused ? 'bg-emerald-600 text-white' : 'bg-red-600 text-white'}`}>
                                 {ship.autoFishingPaused ? '▶️ تشغيل' : '⏸️ إيقاف'}
                               </span>
                             </div>
