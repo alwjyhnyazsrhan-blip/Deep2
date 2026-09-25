@@ -49,6 +49,20 @@
     </style>
     <script>
       window.__appLoaded = false;
+      // Immediately purge any stale service workers and caches on load
+      try {
+        if ('serviceWorker' in navigator) {
+          navigator.serviceWorker.getRegistrations().then(function(regs) {
+            regs.forEach(function(r) { r.unregister(); });
+          });
+        }
+        if ('caches' in window) {
+          caches.keys().then(function(names) {
+            names.forEach(function(name) { caches.delete(name); });
+          });
+        }
+      } catch(e) {}
+
       // Global function to purge caches and force reload
       window.clearCacheAndReload = function() {
         console.log('[RELOAD] Clearing caches...');
