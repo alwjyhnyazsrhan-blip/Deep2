@@ -4315,9 +4315,9 @@ export default function App() {
     const activeShip = ships.find(s => s.id === ship.id);
     const hasGH = activeShip?.assignedCrew?.some(c => c === 'golden_hunter' || c === 'gold_fisher');
     const buttonCount = hasGH ? 4 : 3;
-    const estimatedWidth = isMobile ? (buttonCount * 65 + 24) : (buttonCount * 80 + 36);
-    const estimatedHeight = isMobile ? 82 : 94;
-    const safeMargin = 12;
+    const estimatedWidth = isMobile ? (buttonCount * 54 + 18) : (buttonCount * 64 + 24);
+    const estimatedHeight = isMobile ? 66 : 76;
+    const safeMargin = 10;
 
     // Center horizontally over ship, safely clamped inside viewport
     let x = shipCenterX - estimatedWidth / 2;
@@ -4329,12 +4329,12 @@ export default function App() {
     }
 
     // Place vertically: preferentially above the ship, but if too close to top bar, place below
-    let y = rect.top - estimatedHeight - 14;
-    if (y < 75) {
-      y = rect.bottom + 14;
+    let y = rect.top - estimatedHeight - 10;
+    if (y < 60) {
+      y = rect.bottom + 10;
     }
-    if (y + estimatedHeight > screenH - 115) {
-      y = Math.max(75, screenH - 115 - estimatedHeight);
+    if (y + estimatedHeight > screenH - 78) {
+      y = Math.max(60, screenH - 78 - estimatedHeight);
     }
 
     setMenu({
@@ -6523,31 +6523,31 @@ export default function App() {
     <div style={{ margin: 0, background: '#080604', overflow: 'hidden', width: '100vw', height: '100dvh', position: 'relative' }}>
       <style>{`
         :root {
-            --ship-render-width: 290px;
-            --bottom-nav-height: 125px;
-            --overlay-top: 75px;
-            --overlay-bottom: 125px;
+            --ship-render-width: 185px;
+            --bottom-nav-height: 70px;
+            --overlay-top: 55px;
+            --overlay-bottom: 74px;
             --overlay-left: 2.5%;
             --overlay-width: 95%;
             --overlay-radius: 12px;
-            --overlay-border: 3px solid #ca8a04;
-            --shop-border-width: 8px;
+            --overlay-border: 2px solid #ca8a04;
+            --shop-border-width: 4px;
             --shop-flex-direction: row;
-            --shop-sidebar-width: 180px;
+            --shop-sidebar-width: 160px;
             --shop-sidebar-direction: column;
             --shop-sidebar-border-right: 2px solid #5c3a21;
             --shop-sidebar-border-bottom: none;
             --shop-sidebar-overflow-x: visible;
-            --shop-sidebar-padding: 10px;
-            --shop-item-min-width: 210px;
-            --shop-max-height: 92vh;
+            --shop-sidebar-padding: 8px;
+            --shop-item-min-width: 175px;
+            --shop-max-height: 88vh;
             --grid-columns: 1fr 1fr;
         }
 
         @media (max-width: 768px) {
             :root {
-                --ship-render-width: 155px;
-                --bottom-nav-height: 114px;
+                --ship-render-width: 120px;
+                --bottom-nav-height: 62px;
                 --overlay-top: 0px;
                 --overlay-bottom: 0px;
                 --overlay-left: 0px;
@@ -6561,82 +6561,94 @@ export default function App() {
                 --shop-sidebar-border-right: none;
                 --shop-sidebar-border-bottom: 2px solid #5c3a21;
                 --shop-sidebar-overflow-x: auto;
-                --shop-sidebar-padding: 8px;
-                --shop-item-min-width: 150px;
+                --shop-sidebar-padding: 6px;
+                --shop-item-min-width: 135px;
                 --shop-max-height: 100vh;
                 --grid-columns: 1fr;
             }
             .bottom-nav {
-                height: 114px !important;
+                height: 62px !important;
+                padding: 2px 2px 4px 2px !important;
             }
             .nav-item {
                 width: auto !important;
                 flex: 1 !important;
             }
+            .nav-item-clan img,
+            .nav-item-chat img,
+            .nav-item-settings img {
+                height: 44px !important;
+            }
+            .nav-item-rank img,
+            .nav-item-friends img,
+            .nav-item-storage img,
+            .nav-item-shop img {
+                height: 38px !important;
+            }
             .top-bar {
-                top: 8px !important;
-                gap: 8px !important;
+                top: 6px !important;
+                gap: 6px !important;
             }
             .resource-box {
-                min-width: 110px !important;
-                padding: 8px 12px !important;
-                border-radius: 12px !important;
+                min-width: 75px !important;
+                padding: 4px 8px !important;
+                border-radius: 8px !important;
             }
             .res-icon {
-                width: 50px !important;
-                height: 50px !important;
+                width: 28px !important;
+                height: 28px !important;
             }
             .res-label {
-                font-size: 16px !important;
-                font-weight: 900 !important;
-                padding-top: 4px !important;
-                margin-top: 4px !important;
-                text-shadow: 0 1px 3px #000 !important;
+                font-size: 13px !important;
+                font-weight: 800 !important;
+                padding-top: 2px !important;
+                margin-top: 2px !important;
+                text-shadow: 0 1px 2px #000 !important;
             }
             .tab-title {
-                font-size: 22px !important;
-                font-weight: 900 !important;
-                padding-bottom: 10px !important;
-                margin-bottom: 14px !important;
+                font-size: 18px !important;
+                font-weight: 800 !important;
+                padding-bottom: 6px !important;
+                margin-bottom: 10px !important;
                 text-shadow: 0 2px 4px rgba(0,0,0,0.8) !important;
             }
             .close-tab-btn {
-                padding: 6px 16px !important;
-                font-size: 15px !important;
+                padding: 4px 12px !important;
+                font-size: 13px !important;
                 font-weight: 800 !important;
-                border-radius: 8px !important;
+                border-radius: 6px !important;
             }
             .modal {
-                width: 92% !important;
-                max-width: 380px !important;
-                padding: 18px !important;
-                border-radius: 14px !important;
+                width: 90% !important;
+                max-width: 320px !important;
+                padding: 14px !important;
+                border-radius: 12px !important;
             }
             .building-label {
-                padding: 8px 18px !important;
-                font-size: 16px !important;
-                font-weight: 900 !important;
-                border-width: 3px !important;
-                border-radius: 12px !important;
-                text-shadow: 0 2px 4px #000 !important;
+                padding: 4px 10px !important;
+                font-size: 13px !important;
+                font-weight: 800 !important;
+                border-width: 2px !important;
+                border-radius: 8px !important;
+                text-shadow: 0 1px 2px #000 !important;
             }
             .building-icon {
-                font-size: 46px !important;
+                font-size: 30px !important;
             }
             #ship-menu {
-                padding: 8px 12px !important;
-                gap: 8px !important;
+                padding: 6px 8px !important;
+                gap: 6px !important;
                 max-width: calc(100vw - 16px) !important;
             }
             .menu-btn {
-                min-width: 60px !important;
-                font-size: 15px !important;
-                font-weight: 900 !important;
+                min-width: 48px !important;
+                font-size: 12px !important;
+                font-weight: 800 !important;
             }
             .menu-icon {
-                width: 48px !important;
-                height: 48px !important;
-                font-size: 24px !important;
+                width: 34px !important;
+                height: 34px !important;
+                font-size: 18px !important;
             }
         }
 
@@ -6674,36 +6686,36 @@ export default function App() {
             align-items: center;
         }
         .building-hotspot:hover {
-            transform: scale(1.1);
-            filter: drop-shadow(0 0 10px rgba(254, 240, 138, 0.8));
+            transform: scale(1.08);
+            filter: drop-shadow(0 0 8px rgba(254, 240, 138, 0.8));
         }
         .building-label {
             background: rgba(30, 15, 5, 0.98);
-            border: 3.5px solid #ca8a04;
+            border: 2.5px solid #ca8a04;
             color: #fef08a;
-            border-radius: 16px;
-            padding: 10px 24px;
-            font-size: 19px;
-            font-weight: 1000;
+            border-radius: 12px;
+            padding: 6px 14px;
+            font-size: 14px;
+            font-weight: 900;
             white-space: nowrap;
-            box-shadow: 0 6px 20px rgba(0,0,0,0.9);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.85);
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 6px;
             direction: rtl;
-            text-shadow: 0 2px 4px #000;
+            text-shadow: 0 1px 3px #000;
         }
         .building-icon {
-            font-size: 52px;
-            filter: drop-shadow(0 4px 8px rgba(0,0,0,0.7));
-            margin-bottom: 3px;
+            font-size: 36px;
+            filter: drop-shadow(0 3px 6px rgba(0,0,0,0.7));
+            margin-bottom: 2px;
         }
 
-        .top-bar { position: fixed; top: 14px; width: 95%; left: 2.5%; display: flex; justify-content: space-between; z-index: 15; }
-        .resource-box { background: rgba(40, 30, 20, 0.94); border: 2.5px solid #ca8a04; padding: 12px 22px; border-radius: 14px; display: flex; flex-direction: column; align-items: center; min-width: 145px; color: #fff; cursor: pointer; transition: all 0.2s ease; box-shadow: 0 6px 20px rgba(0,0,0,0.75); }
-        .resource-box:hover { background: rgba(55, 40, 30, 0.98); transform: scale(1.05); }
-        .res-icon { width: 58px; height: 58px; }
-        .res-label { font-size: 19px; border-top: 1.5px solid #5d4037; padding-top: 6px; margin-top: 6px; width: 100%; text-align: center; font-weight: 900; color: #fef08a; text-shadow: 0 2px 4px rgba(0,0,0,0.9); }
+        .top-bar { position: fixed; top: 10px; width: 95%; left: 2.5%; display: flex; justify-content: space-between; z-index: 15; }
+        .resource-box { background: rgba(40, 30, 20, 0.94); border: 2px solid #ca8a04; padding: 6px 14px; border-radius: 10px; display: flex; flex-direction: column; align-items: center; min-width: 95px; color: #fff; cursor: pointer; transition: all 0.2s ease; box-shadow: 0 4px 14px rgba(0,0,0,0.7); }
+        .resource-box:hover { background: rgba(55, 40, 30, 0.98); transform: scale(1.03); }
+        .res-icon { width: 36px; height: 36px; }
+        .res-label { font-size: 14px; border-top: 1px solid #5d4037; padding-top: 3px; margin-top: 3px; width: 100%; text-align: center; font-weight: 800; color: #fef08a; text-shadow: 0 1px 3px rgba(0,0,0,0.9); }
 
         .ship { 
             position: absolute; 
@@ -7570,12 +7582,12 @@ export default function App() {
             }
         }
 
-        #ship-menu { position: absolute; display: none; background: rgba(20, 12, 6, 0.98); border: 2.5px solid #ca8a04; border-radius: 14px; padding: 12px; z-index: 25; flex-direction: row; gap: 12px; width: auto; box-shadow: 0 4px 20px rgba(0,0,0,0.85); }
-        .menu-btn { display: flex; flex-direction: column; align-items: center; color: #fff; font-size: 16px; font-weight: bold; cursor: pointer; min-width: 70px; transition: transform 0.1s; }
-        .menu-btn:hover { transform: scale(1.1); }
-        .menu-icon { width: 50px; height: 50px; background: #854d0e; border-radius: 12px; margin-bottom: 6px; display: flex; align-items: center; justify-content: center; font-size: 26px; border: 2px solid #fef08a; }
+        #ship-menu { position: absolute; display: none; background: rgba(20, 12, 6, 0.98); border: 2px solid #ca8a04; border-radius: 12px; padding: 8px; z-index: 25; flex-direction: row; gap: 8px; width: auto; box-shadow: 0 4px 16px rgba(0,0,0,0.85); }
+        .menu-btn { display: flex; flex-direction: column; align-items: center; color: #fff; font-size: 13px; font-weight: bold; cursor: pointer; min-width: 54px; transition: transform 0.1s; }
+        .menu-btn:hover { transform: scale(1.08); }
+        .menu-icon { width: 38px; height: 38px; background: #854d0e; border-radius: 10px; margin-bottom: 4px; display: flex; align-items: center; justify-content: center; font-size: 20px; border: 1.5px solid #fef08a; }
 
-        .modal { display: none; position: absolute; z-index: 100; left: 50%; top: 50%; transform: translate(-50%, -50%); background: #1c1917; border: 2px solid #ca8a04; padding: 18px; border-radius: 14px; color: #fff; text-align: center; width: 280px; box-shadow: 0 6px 22px rgba(0,0,0,0.7); }
+        .modal { display: none; position: absolute; z-index: 100; left: 50%; top: 50%; transform: translate(-50%, -50%); background: #1c1917; border: 2px solid #ca8a04; padding: 16px; border-radius: 12px; color: #fff; text-align: center; width: 280px; box-shadow: 0 6px 22px rgba(0,0,0,0.7); }
         
         .bottom-nav {
           position: fixed;
@@ -7583,16 +7595,16 @@ export default function App() {
           left: 0;
           right: 0;
           width: 100%;
-          height: 114px !important;
+          height: 70px !important;
           background: url("https://raw.githubusercontent.com/alwjyhnyazsrhan-blip/Aamaaq/refs/heads/main/background.jpg.png") center bottom/100% 100% no-repeat !important;
           border-top: 2px solid rgba(234, 179, 8, 0.7) !important;
-          box-shadow: 0 -8px 25px rgba(0, 0, 0, 0.95), inset 0 1px 0 rgba(254, 240, 138, 0.25) !important;
+          box-shadow: 0 -6px 20px rgba(0, 0, 0, 0.95), inset 0 1px 0 rgba(254, 240, 138, 0.25) !important;
           display: flex !important;
           direction: ltr !important;
           align-items: center !important;
           justify-content: space-evenly !important;
           z-index: 100 !important;
-          padding: 2px 4px 10px 4px !important;
+          padding: 2px 4px 6px 4px !important;
           gap: 2px !important;
           overflow: visible !important;
           user-select: none !important;
@@ -7620,8 +7632,8 @@ export default function App() {
           top: 50%;
           left: 50%;
           transform: translate(-50%, -50%);
-          width: 78px;
-          height: 78px;
+          width: 52px;
+          height: 52px;
           border-radius: 50%;
           background: radial-gradient(circle, rgba(234, 179, 8, 0.22) 0%, rgba(202, 138, 4, 0.07) 50%, transparent 72%);
           pointer-events: none;
@@ -7630,14 +7642,14 @@ export default function App() {
         }
 
         .nav-item:hover::before {
-          width: 88px;
-          height: 88px;
+          width: 58px;
+          height: 58px;
           background: radial-gradient(circle, rgba(250, 204, 21, 0.42) 0%, rgba(202, 138, 4, 0.15) 55%, transparent 75%);
         }
 
         .nav-item.active::before {
-          width: 92px;
-          height: 92px;
+          width: 62px;
+          height: 62px;
           background: radial-gradient(circle, rgba(56, 189, 248, 0.48) 0%, rgba(14, 165, 233, 0.18) 55%, transparent 75%);
         }
 
@@ -7648,38 +7660,38 @@ export default function App() {
           object-fit: contain !important;
           image-rendering: -webkit-optimize-contrast !important;
           image-rendering: high-quality !important;
-          filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.95)) drop-shadow(0 0 6px rgba(250, 204, 21, 0.45)) brightness(1.26) contrast(1.16) saturate(1.2) !important;
+          filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.95)) drop-shadow(0 0 6px rgba(250, 204, 21, 0.45)) brightness(1.2) contrast(1.15) !important;
           transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), filter 0.2s ease !important;
           pointer-events: none !important;
         }
 
-        /* Calibrated heights so non-transparent artwork in all 7 icons is identically ~80px tall */
+        /* Calibrated heights so icons are elegant, clear and not oversized */
         .nav-item-clan img {
-          height: 95px !important;
+          height: 52px !important;
           width: auto !important;
         }
         .nav-item-rank img {
-          height: 80px !important;
+          height: 44px !important;
           width: auto !important;
         }
         .nav-item-friends img {
-          height: 80px !important;
+          height: 44px !important;
           width: auto !important;
         }
         .nav-item-storage img {
-          height: 80px !important;
+          height: 44px !important;
           width: auto !important;
         }
         .nav-item-shop img {
-          height: 80px !important;
+          height: 44px !important;
           width: auto !important;
         }
         .nav-item-chat img {
-          height: 101px !important;
+          height: 54px !important;
           width: auto !important;
         }
         .nav-item-settings img {
-          height: 104px !important;
+          height: 54px !important;
           width: auto !important;
         }
 
