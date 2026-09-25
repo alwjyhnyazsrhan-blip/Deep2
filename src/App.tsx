@@ -4309,7 +4309,7 @@ export default function App() {
 
     const screenW = window.innerWidth;
     const screenH = window.innerHeight;
-    const isMobile = false; // Always open and operate in computer designer mode (وضع مصمم الكمبيوتر دائماً)
+    const isMobile = screenW <= 768;
 
     // Accurate calculation of menu width based on active ship buttons
     const activeShip = ships.find(s => s.id === ship.id);
@@ -6544,7 +6544,101 @@ export default function App() {
             --grid-columns: 1fr 1fr;
         }
 
-        /* وضع مصمم الكمبيوتر الدائم - Permanent Desktop Designer Mode */
+        @media (max-width: 768px) {
+            :root {
+                --ship-render-width: 155px;
+                --bottom-nav-height: 114px;
+                --overlay-top: 0px;
+                --overlay-bottom: 0px;
+                --overlay-left: 0px;
+                --overlay-width: 100%;
+                --overlay-radius: 0px;
+                --overlay-border: none;
+                --shop-border-width: 0px;
+                --shop-flex-direction: column;
+                --shop-sidebar-width: 100%;
+                --shop-sidebar-direction: row;
+                --shop-sidebar-border-right: none;
+                --shop-sidebar-border-bottom: 2px solid #5c3a21;
+                --shop-sidebar-overflow-x: auto;
+                --shop-sidebar-padding: 8px;
+                --shop-item-min-width: 150px;
+                --shop-max-height: 100vh;
+                --grid-columns: 1fr;
+            }
+            .bottom-nav {
+                height: 114px !important;
+            }
+            .nav-item {
+                width: auto !important;
+                flex: 1 !important;
+            }
+            .top-bar {
+                top: 8px !important;
+                gap: 8px !important;
+            }
+            .resource-box {
+                min-width: 110px !important;
+                padding: 8px 12px !important;
+                border-radius: 12px !important;
+            }
+            .res-icon {
+                width: 50px !important;
+                height: 50px !important;
+            }
+            .res-label {
+                font-size: 16px !important;
+                font-weight: 900 !important;
+                padding-top: 4px !important;
+                margin-top: 4px !important;
+                text-shadow: 0 1px 3px #000 !important;
+            }
+            .tab-title {
+                font-size: 22px !important;
+                font-weight: 900 !important;
+                padding-bottom: 10px !important;
+                margin-bottom: 14px !important;
+                text-shadow: 0 2px 4px rgba(0,0,0,0.8) !important;
+            }
+            .close-tab-btn {
+                padding: 6px 16px !important;
+                font-size: 15px !important;
+                font-weight: 800 !important;
+                border-radius: 8px !important;
+            }
+            .modal {
+                width: 92% !important;
+                max-width: 380px !important;
+                padding: 18px !important;
+                border-radius: 14px !important;
+            }
+            .building-label {
+                padding: 8px 18px !important;
+                font-size: 16px !important;
+                font-weight: 900 !important;
+                border-width: 3px !important;
+                border-radius: 12px !important;
+                text-shadow: 0 2px 4px #000 !important;
+            }
+            .building-icon {
+                font-size: 46px !important;
+            }
+            #ship-menu {
+                padding: 8px 12px !important;
+                gap: 8px !important;
+                max-width: calc(100vw - 16px) !important;
+            }
+            .menu-btn {
+                min-width: 60px !important;
+                font-size: 15px !important;
+                font-weight: 900 !important;
+            }
+            .menu-icon {
+                width: 48px !important;
+                height: 48px !important;
+                font-size: 24px !important;
+            }
+        }
 
         #harbor-viewport { 
             position: fixed; 
@@ -7665,13 +7759,13 @@ export default function App() {
         .plaque-btn {
           margin-top: 2px;
           width: 100%;
-          max-width: 58px;
-          padding: 1px 0;
+          max-width: 62px;
+          padding: 2px 1px;
           background: linear-gradient(180deg, #1f1912 0%, #0a0805 100%);
           border: 1.5px solid #ca8a04;
           border-radius: 4px;
           color: #fef08a;
-          font-size: 10.5px;
+          font-size: 11.5px;
           font-weight: 900;
           text-align: center;
           text-shadow: 0 1px 2px #000;

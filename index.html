@@ -2,44 +2,7 @@
 <html lang="ar" dir="rtl" class="notranslate">
   <head>
     <meta charset="UTF-8" />
-    <!-- وضع مصمم الكمبيوتر الدائم والتلقائي على جميع الشاشات والأجهزة -->
-    <meta id="game-viewport" name="viewport" content="width=1280, initial-scale=1.0, minimum-scale=0.1, maximum-scale=3.0, user-scalable=yes" />
-    <script>
-      // وضع مصمم الكمبيوتر التلقائي دائماً (Desktop Designer Mode)
-      (function() {
-        var DESKTOP_WIDTH = 1280;
-        function enforceDesktopViewport() {
-          try {
-            var vp = document.getElementById('game-viewport') || document.querySelector('meta[name="viewport"]');
-            if (!vp) {
-              vp = document.createElement('meta');
-              vp.id = 'game-viewport';
-              vp.name = 'viewport';
-              document.head.prepend(vp);
-            }
-            var sw = (window.screen && window.screen.width) ? window.screen.width : DESKTOP_WIDTH;
-            var sh = (window.screen && window.screen.height) ? window.screen.height : DESKTOP_WIDTH;
-            var isLandscape = (window.screen.orientation && window.screen.orientation.type && window.screen.orientation.type.includes('landscape')) || (window.innerWidth > window.innerHeight);
-            var devW = isLandscape ? Math.max(sw, sh) : Math.min(sw, sh);
-            if (!devW || devW <= 0) devW = window.innerWidth || DESKTOP_WIDTH;
-
-            if (devW < DESKTOP_WIDTH) {
-              var scale = Number((devW / DESKTOP_WIDTH).toFixed(4));
-              vp.setAttribute('content', 'width=' + DESKTOP_WIDTH + ', initial-scale=' + scale + ', minimum-scale=0.1, maximum-scale=3.0, user-scalable=yes');
-            } else {
-              vp.setAttribute('content', 'width=' + DESKTOP_WIDTH + ', initial-scale=1.0, maximum-scale=3.0, user-scalable=yes');
-            }
-          } catch(e) {
-            console.warn('Error configuring desktop viewport:', e);
-          }
-        }
-        enforceDesktopViewport();
-        window.addEventListener('resize', enforceDesktopViewport);
-        window.addEventListener('orientationchange', function() {
-          setTimeout(enforceDesktopViewport, 120);
-        });
-      })();
-    </script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
     <meta name="google" content="notranslate" />
     <title>Remix ملوك الاعماق</title>
     <meta name="description" content="لعبة ملوك الأعماق - مغامرات القراصنة والحروب البحرية الاستراتيجية مع نظام أمان متقدم ومنع تعدد الجلسات" />
