@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="ar" dir="rtl" class="notranslate">
+  <head>
+    <meta charset="UTF-8" />
+    <!-- وضع مصمم الكمبيوتر الدائم والتلقائي على جميع الشاشات والأجهزة -->
+    <meta id="game-viewport" name="viewport" content="width=1280, initial-scale=1.0, minimum-scale=0.1, maximum-scale=3.0, user-scalable=yes" />
+    <script>
+      // وضع مصمم الكمبيوتر التلقائي دائماً (Desktop Designer Mode)
+      (function() {
+        var DESKTOP_WIDTH = 1280;
+        function enforceDesktopViewport() {
+          try {
+            var vp = document.getElementById('game-viewport') || document.querySelector('meta[name="viewport"]');
+            if (!vp) {
+              vp = document.createElement('meta');
+              vp.id = 'game-viewport';
+              vp.name = 'viewport';
+              document.head.prepend(vp);
+            }
+            var sw = (window.screen && window.screen.width) ? window.screen.width : DESKTOP_WIDTH;
+            var sh = (window.screen && window.screen.height) ? window.screen.height : DESKTOP_WIDTH;
+            var isLandscape = (window.screen.orientation && window.screen.orientation.type && window.screen.orientation.type.includes('landscape')) || (window.innerWidth > window.innerHeight);
+            var devW = isLandscape ? Math.max(sw, sh) : Math.min(sw, sh);
+            if (!devW || devW <= 0) devW = window.innerWidth || DESKTOP_WIDTH;
+
+            if (devW < DESKTOP_WIDTH) {
+              var scale = Number((devW / DESKTOP_WIDTH).toFixed(4));
+              vp.setAttribute('content', 'width=' + DESKTOP_WIDTH + ', initial-scale=' + scale + ', minimum-scale=0.1, maximum-scale=3.0, user-scalable=yes');
+            } else {
+              vp.setAttribute('content', 'width=' + DESKTOP_WIDTH + ', initial-scale=1.0, maximum-scale=3.0, user-scalable=yes');
+            }
+          } catch(e) {
+            console.warn('Error configuring desktop viewport:', e);
+          }
+        }
+        enforceDesktopViewport();
+        window.addEventListener('resize', enforceDesktopViewport);
+        window.addEventListener('orientationchange', function() {
+          setTimeout(enforceDesktopViewport, 120);
+        });
+      })();
+    </script>
+    <meta name="google" content="notranslate" />
+    <title>Remix ملوك الاعماق</title>
+    <meta name="description" content="لعبة ملوك الأعماق - مغامرات القراصنة والحروب البحرية الاستراتيجية مع نظام أمان متقدم ومنع تعدد الجلسات" />
+    <meta property="og:title" content="Remix ملوك الاعماق" />
+    <meta property="og:description" content="لعبة ملوك الأعماق - مغامرات القراصنة والحروب البحرية الاستراتيجية مع نظام أمان متقدم ومنع تعدد الجلسات" />
+
+    <!-- Preload critical local game assets -->
+    <link rel="preload" href="/backgrounds/harbor_main.webp" as="image" type="image/webp" />
+
+    <style>
+      html, body, #root {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        touch-action: manipulation;
+        background-color: #0b1329;
+        color: #ffffff;
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      }
+      .initial-loader {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+        width: 100%;
+        background: radial-gradient(circle at center, #1e293b 0%, #0b1329 100%);
+        gap: 16px;
+      }
+      .initial-spinner {
+        width: 48px;
+        height: 48px;
+        border: 4px solid rgba(56, 189, 248, 0.2);
+        border-top-color: #38bdf8;
+        border-radius: 50%;
+        animation: spin 1s infinite linear;
+      }
+      @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+      }
+    </style>
+    <script>
+      window.__appLoaded = false;
+      // Global function to purge caches and force reload
+      window.clearCacheAndReload = function() {
+        console.log('[RELOAD] Clearing caches...');
+        try {
+          if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.getRegistrations().then(function(regs) {
+              regs.forEach(function(r) { r.unregister(); });
+            });
+          }
+          if ('caches' in window) {
+            caches.keys().then(function(names) {
+              names.forEach(function(name) { caches.delete(name); });
+            });
+          }
+          sessionStorage.clear();
+        } catch(err) {
+          console.warn('Error clearing caches:', err);
+        }
+        setTimeout(function() {
+          window.location.reload();
+        }, 150);
+      };
+      window.addEventListener('error', function(e) {
+        console.error('[CRITICAL APPLICATION ERROR]', e);
+      });
+      window.addEventListener('unhandledrejection', function(e) {
+        console.error('[UNHANDLED PROMISE REJECTION]', e.reason);
+      });
+    </script>
+  </head>
+  <body>
+    <div id="root">
+      <div class="initial-loader" id="initial-loader-wrapper">
+        <div style="font-size: 40px; filter: drop-shadow(0 0 10px rgba(56, 189, 248, 0.5));">⚓</div>
+        <div class="initial-spinner"></div>
+        <div id="initial-loader-msg" style="font-size: 17px; color: #38bdf8; font-weight: bold; margin-top: 8px; text-shadow: 0 0 8px rgba(56, 189, 248, 0.4);">جاري تحميل لعبة ملوك الأعماق...</div>
+      </div>
+    </div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
