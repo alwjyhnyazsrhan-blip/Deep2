@@ -4317,15 +4317,13 @@ export default function App() {
 
     const screenW = window.innerWidth;
     const screenH = window.innerHeight;
-    const isMobile = screenW <= 768;
-
-    // Accurate calculation of menu width based on active ship buttons
+    // Desktop mode menu dimensions based on active ship buttons
     const activeShip = ships.find(s => s.id === ship.id);
     const hasGH = activeShip?.assignedCrew?.some(c => c === 'golden_hunter' || c === 'gold_fisher');
     const buttonCount = hasGH ? 4 : 3;
-    const estimatedWidth = isMobile ? (buttonCount * 44 + 14) : (buttonCount * 52 + 18);
-    const estimatedHeight = isMobile ? 54 : 64;
-    const safeMargin = 8;
+    const estimatedWidth = buttonCount * 54 + 20;
+    const estimatedHeight = 64;
+    const safeMargin = 12;
 
     // Center horizontally over ship, safely clamped inside viewport
     let x = shipCenterX - estimatedWidth / 2;
@@ -6530,16 +6528,17 @@ export default function App() {
   return (
     <div style={{ margin: 0, background: '#080604', overflow: 'hidden', width: '100vw', height: '100dvh', position: 'relative' }}>
       <style>{`
+        /* ================= PERMANENT DESKTOP MODE (وضع مصمم الكمبيوتر الدائم) ================= */
         :root {
-            --ship-render-width: 95px;
-            --building-img-size: 80px;
-            --building-hotspot-width: 90px;
-            --bottom-nav-height: 54px;
+            --ship-render-width: 120px;
+            --building-img-size: 105px;
+            --building-hotspot-width: 115px;
+            --bottom-nav-height: 56px;
             --overlay-top: 48px;
             --overlay-bottom: 60px;
-            --overlay-left: 2.5%;
-            --overlay-width: 95%;
-            --overlay-radius: 10px;
+            --overlay-left: 5%;
+            --overlay-width: 90%;
+            --overlay-radius: 12px;
             --overlay-border: 2px solid #ca8a04;
             --shop-border-width: 4px;
             --shop-flex-direction: row;
@@ -6549,120 +6548,95 @@ export default function App() {
             --shop-sidebar-border-bottom: none;
             --shop-sidebar-overflow-x: visible;
             --shop-sidebar-padding: 8px;
-            --shop-item-min-width: 170px;
-            --shop-max-height: 88vh;
+            --shop-item-min-width: 165px;
+            --shop-max-height: 86vh;
             --grid-columns: 1fr 1fr;
         }
 
-        @media (max-width: 768px) {
-            :root {
-                --ship-render-width: 68px;
-                --building-img-size: 58px;
-                --building-hotspot-width: 68px;
-                --bottom-nav-height: 48px;
-                --overlay-top: 0px;
-                --overlay-bottom: 0px;
-                --overlay-left: 0px;
-                --overlay-width: 100%;
-                --overlay-radius: 0px;
-                --overlay-border: none;
-                --shop-border-width: 0px;
-                --shop-flex-direction: column;
-                --shop-sidebar-width: 100%;
-                --shop-sidebar-direction: row;
-                --shop-sidebar-border-right: none;
-                --shop-sidebar-border-bottom: 2px solid #5c3a21;
-                --shop-sidebar-overflow-x: auto;
-                --shop-sidebar-padding: 4px;
-                --shop-item-min-width: 130px;
-                --shop-max-height: 100vh;
-                --grid-columns: 1fr;
-            }
-            .bottom-nav {
-                height: 48px !important;
-                padding: 1px 2px 2px 2px !important;
-            }
-            .nav-item {
-                width: auto !important;
-                flex: 1 !important;
-            }
-            .nav-item-clan img,
-            .nav-item-chat img,
-            .nav-item-settings img {
-                height: 29px !important;
-            }
-            .nav-item-rank img,
-            .nav-item-friends img,
-            .nav-item-storage img,
-            .nav-item-shop img {
-                height: 24px !important;
-            }
-            .top-bar {
-                top: 4px !important;
-                gap: 4px !important;
-            }
-            .resource-box {
-                min-width: 60px !important;
-                padding: 2px 5px !important;
-                border-radius: 6px !important;
-                border: 1.5px solid #ca8a04 !important;
-            }
-            .res-icon {
-                width: 20px !important;
-                height: 20px !important;
-            }
-            .res-label {
-                font-size: 9.5px !important;
-                font-weight: 800 !important;
-                padding-top: 1px !important;
-                margin-top: 1px !important;
-                text-shadow: 0 1px 2px #000 !important;
-            }
-            .tab-title {
-                font-size: 16px !important;
-                font-weight: 800 !important;
-                padding-bottom: 4px !important;
-                margin-bottom: 6px !important;
-                text-shadow: 0 2px 4px rgba(0,0,0,0.8) !important;
-            }
-            .close-tab-btn {
-                padding: 2px 8px !important;
-                font-size: 11px !important;
-                font-weight: 800 !important;
-                border-radius: 5px !important;
-            }
-            .modal {
-                width: 90% !important;
-                max-width: 300px !important;
-                padding: 10px !important;
-                border-radius: 10px !important;
-            }
-            .building-label {
-                padding: 1.5px 5px !important;
-                font-size: 9px !important;
-                font-weight: 800 !important;
-                border-width: 1px !important;
-                border-radius: 5px !important;
-                text-shadow: 0 1px 2px #000 !important;
-            }
-            .building-icon {
-                font-size: 20px !important;
-            }
-            #ship-menu {
-                padding: 4px 6px !important;
-                gap: 4px !important;
-                max-width: calc(100vw - 16px) !important;
-            }
-            .menu-btn {
-                min-width: 38px !important;
-                font-size: 10px !important;
-                font-weight: 800 !important;
-            }
-            .menu-icon {
-                width: 26px !important;
-                height: 26px !important;
-                font-size: 14px !important;
-            }
+        .bottom-nav {
+            height: 56px !important;
+            padding: 2px 8px !important;
+        }
+        .nav-item {
+            width: auto !important;
+            flex: 1 !important;
+        }
+        .nav-item-clan img,
+        .nav-item-chat img,
+        .nav-item-settings img {
+            height: 36px !important;
+        }
+        .nav-item-rank img,
+        .nav-item-friends img,
+        .nav-item-storage img,
+        .nav-item-shop img {
+            height: 30px !important;
+        }
+        .top-bar {
+            top: 6px !important;
+            gap: 8px !important;
+        }
+        .resource-box {
+            min-width: 75px !important;
+            padding: 3px 8px !important;
+            border-radius: 8px !important;
+            border: 1.5px solid #ca8a04 !important;
+        }
+        .res-icon {
+            width: 26px !important;
+            height: 26px !important;
+        }
+        .res-label {
+            font-size: 11px !important;
+            font-weight: 800 !important;
+            padding-top: 1px !important;
+            margin-top: 1px !important;
+            text-shadow: 0 1px 2px #000 !important;
+        }
+        .tab-title {
+            font-size: 18px !important;
+            font-weight: 800 !important;
+            padding-bottom: 5px !important;
+            margin-bottom: 8px !important;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.8) !important;
+        }
+        .close-tab-btn {
+            padding: 3px 12px !important;
+            font-size: 13px !important;
+            font-weight: 800 !important;
+            border-radius: 6px !important;
+        }
+        .modal {
+            width: 90% !important;
+            max-width: 340px !important;
+            padding: 14px !important;
+            border-radius: 12px !important;
+        }
+        .building-label {
+            padding: 2px 8px !important;
+            font-size: 10.5px !important;
+            font-weight: 800 !important;
+            border-width: 1.5px !important;
+            border-radius: 6px !important;
+            text-shadow: 0 1px 2px #000 !important;
+        }
+        .building-icon {
+            font-size: 24px !important;
+        }
+        #ship-menu {
+            padding: 5px 8px !important;
+            gap: 6px !important;
+            max-width: calc(100vw - 16px) !important;
+        }
+        .menu-btn {
+            min-width: 44px !important;
+            font-size: 11px !important;
+            font-weight: 800 !important;
+        }
+        .menu-icon {
+            width: 30px !important;
+            height: 30px !important;
+            font-size: 16px !important;
         }
 
         #harbor-viewport { 
@@ -7886,14 +7860,7 @@ export default function App() {
 
 
       {/* ----------------- GAME BACKGROUND AND HARBOR VIEW ----------------- */}
-      <div 
-        id="harbor-viewport"
-        style={{
-          '--ship-render-width': `${Math.round(80 * harborZoom)}px`,
-          '--building-img-size': `${Math.round(70 * harborZoom)}px`,
-          '--building-hotspot-width': `${Math.round(80 * harborZoom)}px`,
-        } as React.CSSProperties}
-      >
+      <div id="harbor-viewport">
         <div 
           id="map-canvas" 
           style={(() => {
@@ -14377,98 +14344,6 @@ export default function App() {
               })}
             </div>
           )}
-        </div>
-      )}
-
-      {/* ----------------- HARBOR VIEWPORT ZOOM CONTROLLER ----------------- */}
-      {activeTab === 'harbor' && (
-        <div style={{
-          position: 'fixed',
-          top: '50px',
-          right: '2.5%',
-          zIndex: 14,
-          display: 'flex',
-          alignItems: 'center',
-          gap: '3px',
-          background: 'rgba(20, 15, 10, 0.94)',
-          border: '1.5px solid #ca8a04',
-          borderRadius: '20px',
-          padding: '2px 7px',
-          boxShadow: '0 4px 12px rgba(0,0,0,0.7)',
-          fontSize: '11px',
-          fontWeight: 'bold',
-          color: '#fef08a',
-          direction: 'rtl',
-          userSelect: 'none'
-        }}>
-          <span style={{ fontSize: '12px' }}>🔍</span>
-          <button 
-            onClick={() => {
-              const nz = Math.max(0.45, Math.round((harborZoom - 0.1) * 10) / 10);
-              setHarborZoom(nz);
-              localStorage.setItem('pirate_harbor_zoom', nz.toString());
-            }}
-            style={{ 
-              background: '#3b2512', 
-              color: '#fff', 
-              border: '1px solid #78350f', 
-              borderRadius: '4px', 
-              width: '20px', 
-              height: '20px', 
-              cursor: 'pointer', 
-              fontWeight: '900',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              lineHeight: 1
-            }}
-            title="تصغير الرؤية (Zoom Out)"
-          >-</button>
-          <span style={{ minWidth: '32px', textAlign: 'center', fontSize: '10px', color: '#fef08a' }}>
-            {Math.round(harborZoom * 100)}%
-          </span>
-          <button 
-            onClick={() => {
-              const nz = Math.min(1.2, Math.round((harborZoom + 0.1) * 10) / 10);
-              setHarborZoom(nz);
-              localStorage.setItem('pirate_harbor_zoom', nz.toString());
-            }}
-            style={{ 
-              background: '#3b2512', 
-              color: '#fff', 
-              border: '1px solid #78350f', 
-              borderRadius: '4px', 
-              width: '20px', 
-              height: '20px', 
-              cursor: 'pointer', 
-              fontWeight: '900',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              lineHeight: 1
-            }}
-            title="تكبير الرؤية (Zoom In)"
-          >+</button>
-          <button 
-            onClick={() => {
-              const nz = harborZoom <= 0.65 ? 0.85 : 0.6;
-              setHarborZoom(nz);
-              localStorage.setItem('pirate_harbor_zoom', nz.toString());
-            }}
-            style={{ 
-              background: harborZoom <= 0.65 ? '#ca8a04' : '#291d14', 
-              color: harborZoom <= 0.65 ? '#000' : '#fef08a', 
-              border: '1px solid #ca8a04', 
-              borderRadius: '10px', 
-              padding: '1px 6px', 
-              fontSize: '9.5px', 
-              cursor: 'pointer', 
-              fontWeight: '900' 
-            }}
-            title="التبديل إلى مقاس واسع ومصغر للبحر"
-          >
-            {harborZoom <= 0.65 ? 'أوسع ✓' : 'تصغير'}
-          </button>
         </div>
       )}
 

@@ -2,8 +2,38 @@
 <html lang="ar" dir="rtl" class="notranslate">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+    <meta name="viewport" id="game-viewport" content="width=1024, initial-scale=0.38, minimum-scale=0.25, maximum-scale=2.5, user-scalable=yes" />
     <meta name="google" content="notranslate" />
+    <script>
+      // Force Desktop Site Mode (وضع موقع الكمبيوتر) automatically on all devices
+      (function enforceDesktopMode() {
+        try {
+          var targetWidth = 1024;
+          var screenW = window.screen && window.screen.width ? window.screen.width : (window.innerWidth || 360);
+          if (window.innerWidth && window.innerWidth < targetWidth && window.innerWidth > 0) {
+            screenW = window.innerWidth;
+          }
+          var initialScale = screenW ? Math.min(1.0, screenW / targetWidth) : 0.38;
+          var vp = document.getElementById('game-viewport') || document.querySelector('meta[name="viewport"]');
+          if (vp) {
+            vp.setAttribute('content', 'width=' + targetWidth + ', initial-scale=' + initialScale.toFixed(3) + ', minimum-scale=' + (initialScale * 0.4).toFixed(3) + ', maximum-scale=2.5, user-scalable=yes');
+          }
+        } catch(e) {}
+      })();
+      window.addEventListener('resize', function() {
+        try {
+          var targetWidth = 1024;
+          var screenW = window.innerWidth || (window.screen ? window.screen.width : 360);
+          if (screenW < targetWidth && screenW > 0) {
+            var scale = (screenW / targetWidth).toFixed(3);
+            var vp = document.getElementById('game-viewport');
+            if (vp) {
+              vp.setAttribute('content', 'width=' + targetWidth + ', initial-scale=' + scale + ', minimum-scale=' + (scale * 0.4).toFixed(3) + ', maximum-scale=2.5, user-scalable=yes');
+            }
+          }
+        } catch(e) {}
+      });
+    </script>
     <title>Remix ملوك الاعماق</title>
     <meta name="description" content="لعبة ملوك الأعماق - مغامرات القراصنة والحروب البحرية الاستراتيجية مع نظام أمان متقدم ومنع تعدد الجلسات" />
     <meta property="og:title" content="Remix ملوك الاعماق" />
